@@ -40,7 +40,7 @@ function Auth({ onAuthenticated }) {
     <form onSubmit={submit}>
       {mode === 'register' && <label>Nome<input required value={form.nome} onChange={(e) => setForm({ ...form, nome: e.target.value })} /></label>}
       <label>E-mail<input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} /></label>
-      <label>Senha<input type="password" minLength="6" required value={form.senha} onChange={(e) => setForm({ ...form, senha: e.target.value })} /></label>
+      <label>Senha<input type="password" minLength="8" required value={form.senha} onChange={(e) => setForm({ ...form, senha: e.target.value })} /></label>
       {error && <p className="alert error">{error}</p>}
       <button className="primary full" disabled={loading}>{loading ? 'Aguarde…' : mode === 'login' ? 'Entrar' : 'Cadastrar'}</button>
     </form>
