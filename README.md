@@ -24,6 +24,8 @@ Preencha `VITE_API_URL` no arquivo `.env` com a URL pública da API, por exemplo
 
 As rotas privadas recebem automaticamente `Authorization: Bearer <token>`. O token é guardado somente no `localStorage` do navegador e removido no logout ou em resposta 401.
 
+>login teste email:admin@gmail.com senha:12345678
+
 ## Deploy na Vercel
 
 1. Importe este repositório na Vercel.
