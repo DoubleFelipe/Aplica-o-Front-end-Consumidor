@@ -40,11 +40,11 @@ export async function request(path, options = {}) {
 }
 
 export const endpoints = {
-  login: (payload) => request('/api/auth/login', { method: 'POST', body: JSON.stringify(payload) }),
-  register: (payload) => request('/api/auth/register', { method: 'POST', body: JSON.stringify(payload) }),
-  tickets: () => request('/api/chamados'),
-  createTicket: (payload) => request('/api/chamados', { method: 'POST', body: JSON.stringify(payload) }),
-  updateStatus: (id, status) => request(`/api/chamados/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
-  comments: (id) => request(`/api/chamados/${id}/comentarios`),
-  addComment: (id, mensagem) => request(`/api/chamados/${id}/comentarios`, { method: 'POST', body: JSON.stringify({ mensagem }) }),
+  login: (payload) => request('/api/v1/auth/login', { method: 'POST', body: JSON.stringify(payload) }),
+  register: (payload) => request('/api/v1/auth/register', { method: 'POST', body: JSON.stringify(payload) }),
+  tickets: () => request('/api/v1/chamados'),
+  createTicket: (payload) => request('/api/v1/chamados', { method: 'POST', body: JSON.stringify(payload) }),
+  updateStatus: (id, status) => request(`/api/v1/chamados/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
+  comments: (id) => request(`/api/v1/chamados/${id}/comentarios`),
+  addComment: (id, mensagem) => request(`/api/v1/chamados/${id}/comentarios`, { method: 'POST', body: JSON.stringify({ mensagem }) }),
 };

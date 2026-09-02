@@ -16,11 +16,11 @@ Preencha `VITE_API_URL` no arquivo `.env` com a URL pública da API, por exemplo
 
 | Finalidade | Método | Rota |
 | --- | --- | --- |
-| Login | POST | `/api/auth/login` |
-| Cadastro | POST | `/api/auth/register` |
-| Listar/Abrir chamados | GET/POST | `/api/chamados` |
-| Atualizar status | PATCH | `/api/chamados/:id/status` |
-| Listar/Adicionar comentários | GET/POST | `/api/chamados/:id/comentarios` |
+| Login | POST | `/api/v1/auth/login` |
+| Cadastro | POST | `/api/v1/auth/register` |
+| Listar/Abrir chamados | GET/POST | `/api/v1/chamados` |
+| Atualizar status | PATCH | `/api/v1/chamados/:id/status` |
+| Listar/Adicionar comentários | GET/POST | `/api/v1/chamados/:id/comentarios` |
 
 As rotas privadas recebem automaticamente `Authorization: Bearer <token>`. O token é guardado somente no `localStorage` do navegador e removido no logout ou em resposta 401.
 
