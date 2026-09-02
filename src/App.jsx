@@ -17,13 +17,20 @@ function Auth({ onAuthenticated }) {
   const [form, setForm] = useState({ nome: '', email: '', senha: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const submit = async (event) => {
-    event.preventDefault(); setError(''); setLoading(true);
+    event.preventDefault(); setError(''); setSuccess(''); setLoading(true);
     try {
       const result = mode === 'login'
         ? await endpoints.login({ email: form.email, senha: form.senha })
         : await endpoints.register(form);
+      if (mode === 'register') {
+        setMode('login');
+        setForm({ nome: '', email: form.email, senha: '' });
+        setSuccess('Conta criada com sucesso. Entre com seu e-mail e senha para continuar.');
+        return;
+      }
       const token = result.token || result.accessToken || result.data?.token;
       if (!token) throw new Error('A API não retornou um token de autenticação.');
       const user = result.usuario || result.user || result.data?.usuario || { nome: form.nome, email: form.email };
@@ -40,11 +47,12 @@ function Auth({ onAuthenticated }) {
     <form onSubmit={submit}>
       {mode === 'register' && <label>Nome<input required value={form.nome} onChange={(e) => setForm({ ...form, nome: e.target.value })} /></label>}
       <label>E-mail<input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} /></label>
-      <label>Senha<input type="password" minLength="8" required value={form.senha} onChange={(e) => setForm({ ...form, senha: e.target.value })} /></label>
+      <label>Senha<input type="password" minLength="8" required value={form.senha} onChange={(e) => setForm({ ...form, senha: e.target.value })} /><small className="field-hint">Use pelo menos 8 caracteres.</small></label>
       {error && <p className="alert error">{error}</p>}
+      {success && <p className="alert">{success}</p>}
       <button className="primary full" disabled={loading}>{loading ? 'Aguarde…' : mode === 'login' ? 'Entrar' : 'Cadastrar'}</button>
     </form>
-    <button className="link" onClick={() => { setMode(mode === 'login' ? 'register' : 'login'); setError(''); }}>
+    <button className="link" onClick={() => { setMode(mode === 'login' ? 'register' : 'login'); setError(''); setSuccess(''); }}>
       {mode === 'login' ? 'Ainda não tenho conta' : 'Já tenho uma conta'}
     </button>
   </section></main>;
