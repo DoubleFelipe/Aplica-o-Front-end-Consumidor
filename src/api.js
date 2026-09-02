@@ -44,7 +44,10 @@ export const endpoints = {
   register: (payload) => request('/api/v1/auth/register', { method: 'POST', body: JSON.stringify(payload) }),
   tickets: () => request('/api/v1/chamados'),
   createTicket: (payload) => request('/api/v1/chamados', { method: 'POST', body: JSON.stringify(payload) }),
-  updateStatus: (id, status) => request(`/api/v1/chamados/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
-  comments: (id) => request(`/api/v1/chamados/${id}/comentarios`),
+  updateStatus: (id, status) => request(`/api/v1/chamados/${id}`, { method: 'PATCH', body: JSON.stringify({ status }) }),
+  comments: async (id) => {
+    const data = await request(`/api/v1/chamados/${id}`);
+    return data.comentarios || data.comments || data.data?.comentarios || data.chamado?.comentarios || [];
+  },
   addComment: (id, mensagem) => request(`/api/v1/chamados/${id}/comentarios`, { method: 'POST', body: JSON.stringify({ mensagem }) }),
 };
